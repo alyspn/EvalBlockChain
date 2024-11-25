@@ -1,0 +1,14 @@
+name: Pull Request validation
+
+on: [pull_request]
+
+
+jobs:
+  CorentinAlyson-contracts-ci:
+    name: Run CorentinAlyson-contracts validation
+    uses: ./.github/workflows/CorentinAlyson-contracts-ci.yaml
+
+  CorentinAlyson-frontend-ci:
+    name: Run CorentinAlyson-frontend validation
+    uses: ./.github/workflows/CorentinAlyson-frontend-ci.yaml
+

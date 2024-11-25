@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
+      - '.vscode/**'
+      - '.idea/**'
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  CorentinAlyson-contracts-validate:
+    name: Run CorentinAlyson-contracts release
+    secrets: inherit
+    uses: ./.github/workflows/CorentinAlyson-contracts-ci.yaml
+
+  CorentinAlyson-contracts-release:
+    name: Run CorentinAlyson-contracts release
+    secrets: inherit
+    uses: ./.github/workflows/CorentinAlyson-contracts-cd.yaml
+    needs: CorentinAlyson-contracts-validate
+
+  CorentinAlyson-frontend-validate:
+    name: Run CorentinAlyson-frontend release
+    secrets: inherit
+    uses: ./.github/workflows/CorentinAlyson-frontend-ci.yaml
+
+  CorentinAlyson-frontend-release:
+    name: Run CorentinAlyson-frontend release
+    secrets: inherit
+    uses: ./.github/workflows/CorentinAlyson-frontend-cd.yaml
+    needs: CorentinAlyson-frontend-validate
